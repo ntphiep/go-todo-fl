@@ -9,6 +9,11 @@ pipeline {
                 git url: 'https://github.com/ntphiep/go-todo-pg', branch: 'main'
             }
         }
+        stage('Install') {
+            steps {
+                sh 'go mod download'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'go build -v ./...'
