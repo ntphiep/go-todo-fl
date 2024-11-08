@@ -11,7 +11,6 @@ import (
 	"gorm.io/gorm"
 )
 
-
 func CreateItem(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// create item
@@ -36,7 +35,7 @@ func CreateItem(db *gorm.DB) gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Cannot create item"})
 			return
 		}
-		
+
 		c.JSON(http.StatusOK, gin.H{"data": dataItem})
 	}
 }
