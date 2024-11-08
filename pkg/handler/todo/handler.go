@@ -36,7 +36,7 @@ func CreateItem(db *gorm.DB) gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Cannot create item"})
 			return
 		}
-
+		
 		c.JSON(http.StatusOK, gin.H{"data": dataItem})
 	}
 }

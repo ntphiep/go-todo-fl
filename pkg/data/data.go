@@ -29,7 +29,7 @@ type User struct {
   Id int `json:"id" gorm:"column:id;"`
   Name string `json:"name" gorm:"column:name;"`
   Age int `json:"age" gorm:"column:age;"`
-  Email string `json:"email" gorm:"column:email;`
+  Email string `json:"email" gorm:"column:email";`
 }
 
 
