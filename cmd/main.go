@@ -18,6 +18,7 @@ func main() {
 		log.Fatalln("Cannot connect to MySQL:", err)
 	}
 
+
 	log.Println("Connected:", db)
 
 	router := gin.Default()
