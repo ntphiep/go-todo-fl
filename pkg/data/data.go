@@ -11,7 +11,7 @@ type ToDoItem struct {
 	Description string     `json:"description" gorm:"column:description;"`
 	Status      string     `json:"status" gorm:"column:status;"`
 	CreatedAt   *time.Time `json:"created_at" gorm:"column:created_at;"`
-	UpdatedAt   *time.Time `json:"updated_at" gorm:"column:updated_at,omitempty;"`
+	UpdatedAt   *time.Time `json:"updated_at,omitempty" gorm:"column:updated_at;"`
 }
 
 func (ToDoItem) TableName() string {
