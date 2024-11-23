@@ -30,9 +30,9 @@ func (TodoItemCreation) TableName() string {
 }
 
 type TodoItemEdit struct {
-	Title       string `json:"title" gorm:"column:title"`
-	Description string `json:"description" gorm:"column:description"`
-	Status      string `json:"status" gorm:"column:status"`
+	Title       *string `json:"title" gorm:"column:title"`
+	Description *string `json:"description" gorm:"column:description"`
+	Status      *string `json:"status" gorm:"column:status"`
 }
 
 func (TodoItemEdit) TableName() string {
