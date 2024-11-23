@@ -46,7 +46,7 @@ func main() {
 		{
 			items.POST("", todo.CreateItem(db))           // create item
 			items.GET("", todo.GetListOfItems(db))        // list items
-			items.GET("/:id", todo.ReadItemById(db))      // get an item by ID
+			items.GET("/:id", todo.GetItemById(db))      // get an item by ID
 			items.PUT("/:id", todo.EditItemById(db))      // edit an item by ID
 			items.DELETE("/:id", todo.DeleteItemById(db)) // delete an item by ID
 		}
