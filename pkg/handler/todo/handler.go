@@ -31,7 +31,7 @@ func CreateItem(db *gorm.DB) gin.HandlerFunc {
 		// }
 
 		// default status
-		dataItem.Status = "doing"
+		// dataItem.Status = "doing"
 
 		if err := db.Create(&dataItem).Error; err != nil {
 
