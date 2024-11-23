@@ -28,11 +28,12 @@ func main() {
 
 	// todo
 	{
-		v1.POST("/items", todo.CreateItem(db))           // create item
-		v1.GET("/items", todo.GetListOfItems(db))        // list items
-		v1.GET("/items/:id", todo.ReadItemById(db))      // get an item by ID
-		v1.PUT("/items/:id", todo.EditItemById(db))      // edit an item by ID
-		v1.DELETE("/items/:id", todo.DeleteItemById(db)) // delete an item by ID
+		items := v1.Group("/items")
+		items.POST("", todo.CreateItem(db))           // create item
+		items.GET("", todo.GetListOfItems(db))        // list items
+		items.GET("/:id", todo.ReadItemById(db))      // get an item by ID
+		items.PUT("/:id", todo.EditItemById(db))      // edit an item by ID
+		items.DELETE("/:id", todo.DeleteItemById(db)) // delete an item by ID
 	}
 
 	// user
