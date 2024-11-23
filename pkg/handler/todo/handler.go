@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ntphiep/go-todo-pg/pkg/data"
@@ -22,21 +23,15 @@ func CreateItem(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		// preprocess title - trim all spaces
-		// dataItem.Title = strings.TrimSpace(dataItem.Title)
-		// if dataItem.Title == "" {
-		// 	c.JSON(http.StatusBadRequest, gin.H{
-		// 		"error": "Title is required",
-		// 	})
-		// 	return
-		// }
-
-		// default status
-		// dataItem.Status = "doing"
+		dataItem.Title = strings.TrimSpace(dataItem.Title)
+		if dataItem.Title == "" {
+			// default status
+			dataItem.Status = "todo"
+			return
+		}
 
 		if err := db.Create(&dataItem).Error; err != nil {
-
 			log.Println("Cannot create item:", err)
-
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"error": "Cannot create item hmm",
 			})
