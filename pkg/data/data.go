@@ -11,16 +11,22 @@ type ToDoItem struct {
 	Description string     `json:"description" gorm:"column:description;"`
 	Status      string     `json:"status" gorm:"column:status;"`
 	CreatedAt   *time.Time `json:"created_at" gorm:"column:created_at;"`
-	UpdatedAt   *time.Time `json:"updated_at	 " gorm:"column:updated_at;"`
+	UpdatedAt   *time.Time `json:"updated_at" gorm:"column:updated_at;"`
 }
 
 func (ToDoItem) TableName() string {
 	return "todo_items"
 }
 
-// func clm() {
-// 	fmt.Println("Hola mundo")
-// }
+
+type TodoItemCreation struct {
+	Title       string `json:"title" binding:"required"`
+	Description string `json:"description"`
+}
+
+
+
+
 
 // -------- user
 type User struct {

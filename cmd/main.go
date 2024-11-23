@@ -29,11 +29,13 @@ func main() {
 	// todo
 	{
 		items := v1.Group("/items")
-		items.POST("", todo.CreateItem(db))           // create item
-		items.GET("", todo.GetListOfItems(db))        // list items
-		items.GET("/:id", todo.ReadItemById(db))      // get an item by ID
-		items.PUT("/:id", todo.EditItemById(db))      // edit an item by ID
-		items.DELETE("/:id", todo.DeleteItemById(db)) // delete an item by ID
+		{
+			items.POST("", todo.CreateItem(db))           // create item
+			items.GET("", todo.GetListOfItems(db))        // list items
+			items.GET("/:id", todo.ReadItemById(db))      // get an item by ID
+			items.PUT("/:id", todo.EditItemById(db))      // edit an item by ID
+			items.DELETE("/:id", todo.DeleteItemById(db))	// delete an item by ID
+		}
 	}
 
 	// user

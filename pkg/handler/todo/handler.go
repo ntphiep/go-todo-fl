@@ -13,17 +13,17 @@ import (
 
 func CreateItem(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// create item
-
 		var dataItem data.ToDoItem
+		
 		if err := c.ShouldBind(&dataItem); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": err.Error(),
+			})
 			return
 		}
 
 		// preprocess title - trim all spaces
 		dataItem.Title = strings.TrimSpace(dataItem.Title)
-
 		if dataItem.Title == "" {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Title is required"})
 			return
@@ -36,7 +36,9 @@ func CreateItem(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"data": dataItem})
+		c.JSON(http.StatusOK, gin.H{
+			"data": dataItem,
+		})
 	}
 }
 
