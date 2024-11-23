@@ -117,28 +117,35 @@ func GetItemById(db *gorm.DB) gin.HandlerFunc {
 
 func EditItemById(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// edit an item by ID
+		var dataItem data.TodoItemEdit
 
 		id, err := strconv.Atoi(c.Param("id"))
-
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": err.Error(),
+			})
 			return
 		}
-
-		var dataItem data.ToDoItem
 
 		if err := c.ShouldBind(&dataItem); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": err.Error(),
+			})
 			return
 		}
 
-		if err := db.Where("id = ?", id).Updates(&dataItem).Error; err != nil {
-			c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		if err := db.
+			Where("id = ?", id).
+			Updates(&dataItem).Error; err != nil {
+			c.JSON(http.StatusNotFound, gin.H{
+				"error": err.Error(),
+			})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"data": true})
+		c.JSON(http.StatusOK, gin.H{
+			"data": true,
+		})
 	}
 }
 

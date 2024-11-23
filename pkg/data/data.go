@@ -18,16 +18,26 @@ func (ToDoItem) TableName() string {
 	return "todo_items"
 }
 
-// type TodoItemCreation struct {
-// 	Id          int    `json:"-" gorm:"column:id"` // auto increment
-// 	Title       string `json:"title" gorm:"column:title"`
-// 	Description string `json:"description" gorm:"column:description"`
-// 	Status      string `json:"status" gorm:"column:status"`
-// }
+type TodoItemCreation struct {
+	Id          int    `json:"-" gorm:"column:id"` // auto increment
+	Title       string `json:"title" gorm:"column:title"`
+	Description string `json:"description" gorm:"column:description"`
+	Status      string `json:"status" gorm:"column:status"`
+}
 
-// func (TodoItemCreation) TableName() string {
-// 	return "todo_items"
-// }
+func (TodoItemCreation) TableName() string {
+	return ToDoItem{}.TableName()
+}
+
+type TodoItemEdit struct {
+	Title       *string `json:"title" gorm:"column:title"`
+	Description *string `json:"description" gorm:"column:description"`
+	Status      *string `json:"status" gorm:"column:status"`
+}
+
+func (TodoItemEdit) TableName() string {
+	return ToDoItem{}.TableName()
+}
 
 // -------- user
 type User struct {
