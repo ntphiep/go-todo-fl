@@ -117,7 +117,7 @@ func GetItemById(db *gorm.DB) gin.HandlerFunc {
 
 func EditItemById(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var dataItem data.ToDoItem
+		var dataItem data.TodoItemEdit
 
 		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
