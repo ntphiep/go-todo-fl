@@ -4,7 +4,6 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ntphiep/go-todo-pg/pkg/data"
@@ -13,8 +12,8 @@ import (
 
 func CreateItem(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var dataItem data.ToDoItem
-		
+		var dataItem data.TodoItemCreation
+
 		if err := c.ShouldBind(&dataItem); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": err.Error(),
@@ -23,25 +22,29 @@ func CreateItem(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		// preprocess title - trim all spaces
-		dataItem.Title = strings.TrimSpace(dataItem.Title)
-		if dataItem.Title == "" {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "Title is required",
-			})
-			return
-		}
+		// dataItem.Title = strings.TrimSpace(dataItem.Title)
+		// if dataItem.Title == "" {
+		// 	c.JSON(http.StatusBadRequest, gin.H{
+		// 		"error": "Title is required",
+		// 	})
+		// 	return
+		// }
 
+		// default status
 		dataItem.Status = "Doing"
+
 		if err := db.Create(&dataItem).Error; err != nil {
+
 			log.Println("Cannot create item:", err)
+
 			c.JSON(http.StatusInternalServerError, gin.H{
-				"error": "Cannot create item",
+				"error": "Cannot create item hmm",
 			})
 			return
 		}
 
 		c.JSON(http.StatusOK, gin.H{
-			"data": dataItem,
+			"data": dataItem.Id,
 		})
 	}
 }

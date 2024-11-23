@@ -18,15 +18,16 @@ func (ToDoItem) TableName() string {
 	return "todo_items"
 }
 
-
 type TodoItemCreation struct {
-	Title       string `json:"title" binding:"required"`
-	Description string `json:"description"`
+	Id          int    `json:"-" gorm:"column:id"` // auto increment
+	Title       string `json:"title" gorm:"column:title"`
+	Description string `json:"description" gorm:"column:description"`
+	Status      string `json:"status" gorm:"column:status"`
 }
 
-
-
-
+func (TodoItemCreation) TableName() string {
+	return "todo_items"
+}
 
 // -------- user
 type User struct {

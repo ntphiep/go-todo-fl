@@ -5,11 +5,15 @@ stop-db:
 	docker stop demo-mysql
 	docker rm demo-mysql
 
-build:
+build-run:
 	go build -o bin/todo cmd/main.go
+	./bin/todo
 
 test:
 	go test -v ./...
 
-run: build
-	./bin/todo
+run:
+	go run cmd/main.go
+
+connect-db:
+	docker exec -it demo-mysql mysql -uroot -pmy-root-pass todo_db
