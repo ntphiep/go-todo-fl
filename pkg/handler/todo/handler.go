@@ -12,7 +12,7 @@ import (
 
 func CreateItem(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var dataItem data.TodoItemCreation
+		var dataItem data.ToDoItem
 
 		if err := c.ShouldBind(&dataItem); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{

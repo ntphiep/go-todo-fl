@@ -11,23 +11,23 @@ type ToDoItem struct {
 	Description string     `json:"description" gorm:"column:description;"`
 	Status      string     `json:"status" gorm:"column:status;"`
 	CreatedAt   *time.Time `json:"created_at" gorm:"column:created_at;"`
-	UpdatedAt   *time.Time `json:"updated_at" gorm:"column:updated_at;"`
+	UpdatedAt   *time.Time `json:"updated_at" gorm:"column:updated_at,omitempty;"`
 }
 
 func (ToDoItem) TableName() string {
 	return "todo_items"
 }
 
-type TodoItemCreation struct {
-	Id          int    `json:"-" gorm:"column:id"` // auto increment
-	Title       string `json:"title" gorm:"column:title"`
-	Description string `json:"description" gorm:"column:description"`
-	Status      string `json:"status" gorm:"column:status"`
-}
+// type TodoItemCreation struct {
+// 	Id          int    `json:"-" gorm:"column:id"` // auto increment
+// 	Title       string `json:"title" gorm:"column:title"`
+// 	Description string `json:"description" gorm:"column:description"`
+// 	Status      string `json:"status" gorm:"column:status"`
+// }
 
-func (TodoItemCreation) TableName() string {
-	return "todo_items"
-}
+// func (TodoItemCreation) TableName() string {
+// 	return "todo_items"
+// }
 
 // -------- user
 type User struct {
