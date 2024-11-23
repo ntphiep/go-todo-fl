@@ -31,7 +31,7 @@ func CreateItem(db *gorm.DB) gin.HandlerFunc {
 		// }
 
 		// default status
-		dataItem.Status = "Doing"
+		// dataItem.Status = "doing"
 
 		if err := db.Create(&dataItem).Error; err != nil {
 
@@ -90,25 +90,33 @@ func GetListOfItems(db *gorm.DB) gin.HandlerFunc {
 	}
 }
 
-func ReadItemById(db *gorm.DB) gin.HandlerFunc {
+func GetItemById(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// get an item by ID
-
 		var dataItem data.ToDoItem
 
 		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": err.Error(),
+			})
 			return
 		}
 
-		if err := db.Where("id = ?", id).First(&dataItem).Error; err != nil {
+		// find item by ID
+		if err := db.
+			Where("id = ?", id).
+			First(&dataItem).Error; err != nil {
+
 			log.Println("Cannot find item:", err)
-			c.JSON(http.StatusNotFound, gin.H{"error": "Cannot find item"})
+			c.JSON(http.StatusNotFound, gin.H{
+				"error": "Cannot find item",
+			})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"data": dataItem})
+		c.JSON(http.StatusOK, gin.H{
+			"data": dataItem,
+		})
 	}
 }
 
