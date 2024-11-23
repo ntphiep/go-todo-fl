@@ -31,7 +31,7 @@ func CreateItem(db *gorm.DB) gin.HandlerFunc {
 		// }
 
 		// default status
-		dataItem.Status = "Doing"
+		dataItem.Status = "doing"
 
 		if err := db.Create(&dataItem).Error; err != nil {
 
@@ -114,7 +114,9 @@ func GetItemById(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"data": dataItem})
+		c.JSON(http.StatusOK, gin.H{
+			"data": dataItem,
+		})
 	}
 }
 
