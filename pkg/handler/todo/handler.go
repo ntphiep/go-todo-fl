@@ -25,14 +25,18 @@ func CreateItem(db *gorm.DB) gin.HandlerFunc {
 		// preprocess title - trim all spaces
 		dataItem.Title = strings.TrimSpace(dataItem.Title)
 		if dataItem.Title == "" {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Title is required"})
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "Title is required",
+			})
 			return
 		}
 
 		dataItem.Status = "Doing"
 		if err := db.Create(&dataItem).Error; err != nil {
 			log.Println("Cannot create item:", err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Cannot create item"})
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Cannot create item",
+			})
 			return
 		}
 
